@@ -222,7 +222,7 @@ function build_query($diff) {
 				$t = array();
 				$k = array();
 				foreach ($fields as $field) {
-					$t[] = "`{$field['Field']}` " . strtoupper($field['Type']) . sqlnull($field['Null']) . sqldefault($field['Default']) . sqlextra($field['Extra']) . sqlcomment($field['Comment']);
+					$t[] = "`{$field['Field']}` " . $field['Type'] . sqlnull($field['Null']) . sqldefault($field['Default']) . sqlextra($field['Extra']) . sqlcomment($field['Comment']);
 				}
 				if (isset($diff['index']['create'][$table_name]) && !empty($diff['index']['create'][$table_name])) {
 					$indexs = $diff['index']['create'][$table_name];
@@ -264,7 +264,7 @@ function build_query($diff) {
 		if (isset($diff['field']['add'])) {
 			foreach ($diff['field']['add'] as $table_name => $fields) {
 				foreach ($fields as $field_name => $field_detail) {
-					$sqls[] = "ALTER TABLE `$table_name` ADD `{$field_name}` " . strtoupper($field_detail['Type']) . sqlcol($field_detail['Collation']) . sqlnull($field_detail['Null']) . sqldefault($field_detail['Default']) . sqlextra($field_detail['Extra']) . sqlcomment($field_detail['Comment']) . " AFTER `{$field_detail['After']}`";
+					$sqls[] = "ALTER TABLE `$table_name` ADD `{$field_name}` " . $field_detail['Type'] . sqlcol($field_detail['Collation']) . sqlnull($field_detail['Null']) . sqldefault($field_detail['Default']) . sqlextra($field_detail['Extra']) . sqlcomment($field_detail['Comment']) . " AFTER `{$field_detail['After']}`";
 				}
 			}
 		}
@@ -291,7 +291,7 @@ function build_query($diff) {
 		if (isset($diff['field']['change'])) {
 			foreach ($diff['field']['change'] as $table_name => $fields) {
 				foreach ($fields as $field_name => $field_detail) {
-					$sqls[] = "ALTER TABLE `$table_name` CHANGE `{$field_name}` `{$field_name}` " . strtoupper($field_detail['Type']) . sqlcol($field_detail['Collation']) . sqlnull($field_detail['Null']) . sqldefault($field_detail['Default']) . sqlextra($field_detail['Extra']) . sqlcomment($field_detail['Comment']);
+					$sqls[] = "ALTER TABLE `$table_name` CHANGE `{$field_name}` `{$field_name}` " . $field_detail['Type'] . sqlcol($field_detail['Collation']) . sqlnull($field_detail['Null']) . sqldefault($field_detail['Default']) . sqlextra($field_detail['Extra']) . sqlcomment($field_detail['Comment']);
 				}
 			}
 		}
